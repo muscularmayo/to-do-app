@@ -13,7 +13,7 @@
 }
 
 #todaysTasks {
-  color: blue;
+  color: purple;
   position: absolute;
   bottom: 0px;
 }
@@ -28,4 +28,14 @@ h1 {
 
 body {
   background-color: silver;
+}
+
+.task {
+  padding: 2px;
+  margin: 1px;
+  border: black;
+}
+
+.project {
+  padding: 1px;
 }
