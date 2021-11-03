@@ -1,5 +1,6 @@
 import './style.css';
-import pageInit from './initializePage'
+import {initializePage} from './initializePage.js'
+
 /* storage structure will look like:
 
 {project1: {tasks: [{title , date , details , priority}, {title , date , details , priority}]
@@ -7,12 +8,13 @@ import pageInit from './initializePage'
  project2: {tasks: [{array of objects, each object describing a single task}]
             description: 'a short description of our project here'                          }
 }
-*/
+
 
 const storage = {}
 storage['default project'] =
 {'tasks' : [{'title': 'placeholder', 'date': '03/03/03', 'details': 'some deets here', 'priority': 'high'}],
 'description': 'a brief description of the project at hand'};
+*/
 
 
 
@@ -21,3 +23,9 @@ storage['default project'] =
 
 
 
+
+
+
+
+
+export const container = document.querySelector('#container')
