@@ -1,10 +1,11 @@
+//front end DOM Manipulation shall go here
 import {container} from './app.js'
 import {logic} from './logic.js'
 const log = logic();
 
 
 
-const domManipulation = function() {
+const view = function() {
 
   const appendProjectsHeader = function() {
     //upper left: "Projects"
@@ -33,4 +34,4 @@ const domManipulation = function() {
 
 }
 
-export {domManipulation}
+export {view}

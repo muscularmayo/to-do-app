@@ -1,6 +1,8 @@
 import './style.css';
 import {initializePage} from './initializePage.js'
 
+
+
 /* storage structure will look like:
 
 {project1: {tasks: [{title , date , details , priority}, {title , date , details , priority}]
