@@ -10,15 +10,27 @@
       <div id="projectsHeader">
         <h3>Projects</h3>
       </div>
-      <div id="projectTitle"></div>
+      <div id="projectTitle">
+        <h3>Project Whatever</h3>
+      </div>
       <div id="projectList">
+        <div class="project">project 1</div>
+        <div class="project">project 2</div>
+        <div class="project">Project Whatever</div>
+        <div class="project">project 3</div>
         <div id="todaysTasks">
           <div class="project"> today's tasks </div>
         </div>
       </div>
-      <div id="taskList">
-        <button id='addTask'>Add Task</button>
-        <div id='taskForm'>
+      <div id="taskList"class="column">
+        <div class="task">task1</div>
+        <div class="task">task2</div>
+        <div class="task">task3</div>
+        <div class="task">task4</div>
+        <div class="task">task5</div>
+        <div class="task">task6</div>
+        <button class='taskForm'>Add Task</button>
+        <div id='addTask'>
           <label for='title'>Task Name</label>
           <input type='text' id='title'>
           <input type='date' id='date'>
@@ -31,9 +43,12 @@
           <label for='description'>Task Description</label>
           <input type='text' id='description'>
           <div>
-            <input type='submit' value='Submit' onsubmit='createTaskfromInput()'>
+            <input type='submit' value='Submit' onsubmit=''>
           </div>
         </div>
+        <form>
+
+        </form>
       </div>
 
     </div>
