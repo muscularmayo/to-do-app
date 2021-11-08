@@ -16,6 +16,8 @@ storage['default project'] =
 'description': 'a brief description of the project at hand'};
 */
 
+const storage = {};
+
 const addTaskButton = document.querySelector('#addTask');
 const container = document.querySelector('#container');
 const projects = document.querySelectorAll('.project');
@@ -23,9 +25,28 @@ const tasks = document.querySelectorAll('.task');
 
 //addTaskButton.addEventListener('click', 'appendInputForm')
 
+const createAddProjectForm = function() {
+
+}
+
+const addProjectForm = function () {
+
+}
+
+const addProjectToStorage = function () {
+
+}
+
+const createAddProjectButton = function () {
+  const addProjectButton = document.createElement('button');
+  addProjectButton.setAttribute('id', 'addProject')
+  addProjectButton.innerHTML = 'Add Project'
+  return addProjectButton;
+}
 
 
 const handleProjectClick = function() {
+  const currentProject = document.querySelector
   const title = this.innerHTML;
   setProjectTitle(title)
   //renderTaskList()
@@ -143,9 +164,13 @@ const createInputForm = function() {
 
   const div = document.createElement('div');
   const submit = document.createElement('input')
+  const cancel = document.createElement('input')
   submit.setAttribute('type', 'submit')
   submit.setAttribute('value', 'Submit')
+  cancel.setAttribute('type', 'submit')
+  cancel.setAttribute('value', 'Cancel')
   div.appendChild(submit)
+  div.appendChild(cancel)
 
   main.appendChild(div);
   //submit.setAttribute('onsubmit', 'createTaskFromInput')

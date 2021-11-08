@@ -39,3 +39,15 @@ body {
 .project {
   padding: 1px;
 }
+
+#taskForm > input, label {
+  margin: 3px;
+}
+
+div > input {
+  margin: 3px;
+}
+
+#addProject {
+  background-color: silver
+}
