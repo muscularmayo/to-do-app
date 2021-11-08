@@ -17,6 +17,11 @@ storage['default project'] =
 */
 
 const storage = {};
+storage['default project'] = {
+  'tasks': [],
+  'description': ''
+};
+
 
 const addTaskButton = document.querySelector('#addTask');
 const container = document.querySelector('#container');
@@ -24,6 +29,7 @@ const projects = document.querySelectorAll('.project');
 const tasks = document.querySelectorAll('.task');
 
 //addTaskButton.addEventListener('click', 'appendInputForm')
+
 
 const createAddProjectForm = function() {
 
@@ -51,6 +57,8 @@ const handleProjectClick = function() {
   setProjectTitle(title)
   //renderTaskList()
 }
+
+
 
 const setProjectTitle = function(title) {
   const h3 = document.createElement('h3')
@@ -90,15 +98,18 @@ const createAddTaskButton = function() {
   //<button id='addTask' onClick='appendInputForm'>Add Task</button>
   const button = document.createElement('button');
   button.setAttribute('id', 'addTask')
-  button.setAttribute('onClick','appendInputForm')
+  button.addEventListener('click', handleAddTaskButton)
+
   button.innerHTML = 'Add Task'
 
   return button;
 }
 
 const removeAddTaskButton = function() {
-  if(document.querySelector('#addTask')) {
-
+  if (document.querySelector('#addTask')) {
+    const taskList = document.querySelector('#taskList')
+    const addButton = document.querySelector('#addTask')
+    taskList.removeChild(addButton)
   }
 
 }
@@ -163,12 +174,12 @@ const createInputForm = function() {
   main.appendChild(descriptionInput)
 
   const div = document.createElement('div');
-  const submit = document.createElement('input')
-  const cancel = document.createElement('input')
-  submit.setAttribute('type', 'submit')
-  submit.setAttribute('value', 'Submit')
-  cancel.setAttribute('type', 'submit')
-  cancel.setAttribute('value', 'Cancel')
+
+  const submit = document.createElement('button')
+  const cancel = document.createElement('button')
+  submit.innerHTML = 'Submit'
+  cancel.innerHTML = 'Cancel'
+  cancel.addEventListener('click', handleCancelAddTaskButton)
   div.appendChild(submit)
   div.appendChild(cancel)
 
@@ -180,16 +191,26 @@ const createInputForm = function() {
 }
 
 const appendInputForm = function() {
-  if(!document.querySelector('#taskForm')){
     //remove addTask button and then append Input form, after input form is submitted we will...
     //create a task from that input form, remove the input form, append the task, slap the button back on
     document.querySelector('#taskList').appendChild(createInputForm())
-  } else {
-    console.log('already an input form!')
+
+
+}
+
+const handleAddTaskButton = function() {
+  if(!document.querySelector('#taskForm')) {
+    removeAddTaskButton();
+    appendInputForm();
   }
 
 }
 
+const handleCancelAddTaskButton = function() {
+  console.log(this)
+  removeInputForm();
+  appendAddTaskButton();
+}
 
 const removeInputForm = function() {
   if(document.querySelector('#taskList').lastElementChild.id === 'taskForm') {
@@ -232,7 +253,7 @@ projects.forEach(project => {
   project.addEventListener('click', handleProjectClick)
 })
 
-addTaskButton.addEventListener('click', appendInputForm)
+addTaskButton.addEventListener('click', handleAddTaskButton)
 
 
 
