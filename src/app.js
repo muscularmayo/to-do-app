@@ -25,7 +25,26 @@ const tasks = document.querySelectorAll('.task');
 
 
 
+const handleProjectClick = function() {
+  const title = this.innerHTML;
+  setProjectTitle(title)
+  //renderTaskList()
+}
 
+const setProjectTitle = function(title) {
+  const h3 = document.createElement('h3')
+  h3.innerHTML = title;
+  const projectTitle = document.querySelector('#projectTitle')
+  const projectName = projectTitle.firstElementChild;
+
+  console.log(projectName);
+  projectTitle.removeChild(projectName);
+  projectTitle.appendChild(h3);
+}
+
+const renderTaskList = function(title) {
+  //remove the current task list and bring in all the associated tasks from the storage compartment of our shit
+}
 
 const createTaskFromInput = function() {
   const task = {}
@@ -35,6 +54,36 @@ const createTaskFromInput = function() {
   task.priority = document.querySelector('#priority')
 
   return task;
+}
+
+const storeTaskFromInput = function() {
+
+}
+
+const handleInputSubmit = function () {
+  //create task from input, save it to storage, render page from storage (using storage/state to append things)
+  //remove input form, return addTask button
+}
+
+const createAddTaskButton = function() {
+  //<button id='addTask' onClick='appendInputForm'>Add Task</button>
+  const button = document.createElement('button');
+  button.setAttribute('id', 'addTask')
+  button.setAttribute('onClick','appendInputForm')
+  button.innerHTML = 'Add Task'
+
+  return button;
+}
+
+const removeAddTaskButton = function() {
+  if(document.querySelector('#addTask')) {
+
+  }
+
+}
+
+const appendAddTaskButton = function() {
+  document.querySelector('#taskList').appendChild(createAddTaskButton())
 }
 
 const createInputForm = function() {
@@ -63,17 +112,23 @@ const createInputForm = function() {
   const prioritySelect = document.createElement('select')
   prioritySelect.setAttribute('id','priority')
   prioritySelect.setAttribute('name', 'priority')
+
   const highOption = document.createElement('option');
   highOption.setAttribute('value','high')
+  highOption.innerHTML = 'High'
+
   const mediumOption = document.createElement('option')
   mediumOption.setAttribute('value', 'medium')
+  mediumOption.innerHTML = 'Medium'
+
   const lowOption = document.createElement('option')
   lowOption.setAttribute('value','low')
+  lowOption.innerHTML = 'Low';
 
   prioritySelect.appendChild(highOption)
   prioritySelect.appendChild(mediumOption)
   prioritySelect.appendChild(lowOption)
-
+  main.appendChild(priorityLabel)
   main.appendChild(prioritySelect)
 
   const descriptionLabel = document.createElement('label')
@@ -99,10 +154,32 @@ const createInputForm = function() {
   return main;
 }
 
-console.log(createInputForm())
+const appendInputForm = function() {
+  if(!document.querySelector('#taskForm')){
+    //remove addTask button and then append Input form, after input form is submitted we will...
+    //create a task from that input form, remove the input form, append the task, slap the button back on
+    document.querySelector('#taskList').appendChild(createInputForm())
+  } else {
+    console.log('already an input form!')
+  }
+
+}
 
 
-/*<div id='taskForm'>
+const removeInputForm = function() {
+  if(document.querySelector('#taskList').lastElementChild.id === 'taskForm') {
+    document.querySelector('#taskList').lastElementChild.remove()
+    return true;
+  };
+  return false;
+
+}
+
+//console.log(createInputForm())
+
+//<div id="taskList">
+  //<tasks all over the place>
+/*  <div id='taskForm'>
           <label for='title'>Task Name</label>
           <input type='text' id='title'>
 
@@ -124,9 +201,15 @@ console.log(createInputForm())
         </div>
 */
 
+console.log(createInputForm())
+
+projects.forEach(project => {
+  project.addEventListener('click', handleProjectClick)
+})
+
+addTaskButton.addEventListener('click', appendInputForm)
 
 
 
 
-
-export {container}
+export {container as container}

@@ -29,8 +29,8 @@
         <div class="task">task4</div>
         <div class="task">task5</div>
         <div class="task">task6</div>
-        <button class='taskForm'>Add Task</button>
-        <div id='addTask'>
+        <button id='addTask'>Add Task</button>
+        <div id='taskForm'>
           <label for='title'>Task Name</label>
           <input type='text' id='title'>
           <input type='date' id='date'>
@@ -43,12 +43,9 @@
           <label for='description'>Task Description</label>
           <input type='text' id='description'>
           <div>
-            <input type='submit' value='Submit' onsubmit=''>
+            <input type='submit' value='Submit' onSubmit='createTaskfromInput'>
           </div>
         </div>
-        <form>
-
-        </form>
       </div>
 
     </div>
