@@ -23,6 +23,11 @@ storage['default project'] = {
 };
 
 
+
+
+console.log(storage)
+
+
 const addTaskButton = document.querySelector('#addTask');
 const container = document.querySelector('#container');
 const projects = document.querySelectorAll('.project');
@@ -31,24 +36,25 @@ const tasks = document.querySelectorAll('.task');
 //addTaskButton.addEventListener('click', 'appendInputForm')
 
 
-const createAddProjectForm = function() {
-
-}
-
-const addProjectForm = function () {
-
-}
 
 const addProjectToStorage = function () {
 
 }
 
-const createAddProjectButton = function () {
-  const addProjectButton = document.createElement('button');
-  addProjectButton.setAttribute('id', 'addProject')
-  addProjectButton.innerHTML = 'Add Project'
-  return addProjectButton;
+//taskInputForm
+const removeInputForm = function() {
+  if(document.querySelector('#taskList').lastElementChild.id === 'taskForm') {
+    document.querySelector('#taskList').lastElementChild.remove()
+    return true;
+  };
+  return false;
+
 }
+
+const handleAddProject = function() {
+
+}
+
 
 
 const handleProjectClick = function() {
@@ -58,7 +64,64 @@ const handleProjectClick = function() {
   //renderTaskList()
 }
 
+const handleCancelAddProjectButton = function() {
+  const projectInputForm = document.querySelector('#addProject')
+  const projectList = document.querySelector('#projectList')
+  projectList.removeChild(projectInputForm)
+  projectList.appendChild(createAddProjectButton())
+}
 
+const createAddProjectInput = function() {
+  const main = document.createElement('div')
+  main.setAttribute('id', 'addProject')
+
+  const input = document.createElement('input')
+  input.setAttribute('type', 'text')
+  input.setAttribute('id','addProjectInput')
+
+  const div = document.createElement('div')
+
+
+  const add = document.createElement('button')
+  const cancel = document.createElement('button')
+  add.innerHTML = 'Add'
+  cancel.innerHTML = 'Cancel'
+  cancel.addEventListener('click', handleCancelAddProjectButton)
+  div.appendChild(add)
+  div.appendChild(cancel)
+  main.appendChild(input);
+  main.appendChild(div);
+  return main;
+
+
+}
+
+const appendAddProjectInput = function() {
+  const addButton = document.querySelector('#addProject')
+  const projectList = document.querySelector('#projectList')
+  projectList.removeChild(addButton)
+  projectList.appendChild(createAddProjectInput())
+}
+
+const createAddProjectButton = function () {
+  const addProjectButton = document.createElement('button');
+  addProjectButton.setAttribute('id', 'addProject')
+  addProjectButton.innerHTML = 'Add Project'
+  addProjectButton.addEventListener('click', appendAddProjectInput)
+  return addProjectButton;
+}
+
+
+const appendAddProjectButton = function() {
+  const addProjectButton = document.querySelector('#addProject')
+  const projectList = document.querySelector('#projectList')
+  if(!addProjectButton) {
+    projectList.appendChild(createAddProjectButton())
+  }
+}
+appendAddProjectButton();
+
+console.log(createAddProjectInput())
 
 const setProjectTitle = function(title) {
   const h3 = document.createElement('h3')
@@ -66,10 +129,15 @@ const setProjectTitle = function(title) {
   const projectTitle = document.querySelector('#projectTitle')
   const projectName = projectTitle.firstElementChild;
 
-  console.log(projectName);
-  projectTitle.removeChild(projectName);
+  console.log(h3);
+  if(projectName) {
+    projectTitle.removeChild(projectName);
+
+  }
   projectTitle.appendChild(h3);
 }
+
+
 
 const renderTaskList = function(title) {
   //remove the current task list and bring in all the associated tasks from the storage compartment of our shit
@@ -77,8 +145,8 @@ const renderTaskList = function(title) {
 
 const createTaskFromInput = function() {
   const task = {}
-  task.title = document.querySelector('#title')
-  task.description = document.querySelector('#description')
+  task.title = document.querySelector('#title') || 'default task'
+  task.description = document.querySelector('#description') || ''
   task.date = document.querySelector('#date')
   task.priority = document.querySelector('#priority')
 
@@ -116,6 +184,12 @@ const removeAddTaskButton = function() {
 
 const appendAddTaskButton = function() {
   document.querySelector('#taskList').appendChild(createAddTaskButton())
+}
+
+const handleCancelAddTaskButton = function() {
+  console.log(this)
+  removeInputForm();
+  appendAddTaskButton();
 }
 
 const createInputForm = function() {
@@ -206,20 +280,11 @@ const handleAddTaskButton = function() {
 
 }
 
-const handleCancelAddTaskButton = function() {
-  console.log(this)
-  removeInputForm();
-  appendAddTaskButton();
-}
-
-const removeInputForm = function() {
-  if(document.querySelector('#taskList').lastElementChild.id === 'taskForm') {
-    document.querySelector('#taskList').lastElementChild.remove()
-    return true;
-  };
-  return false;
+const handleAddTaskSubmitButton = function () {
+  createTaskFromInput();
 
 }
+
 
 //console.log(createInputForm())
 
