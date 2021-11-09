@@ -42,7 +42,7 @@ const addProjectToStorage = function () {
 }
 
 //taskInputForm
-const removeInputForm = function() {
+const removeTaskInputForm = function() {
   if(document.querySelector('#taskList').lastElementChild.id === 'taskForm') {
     document.querySelector('#taskList').lastElementChild.remove()
     return true;
@@ -52,6 +52,11 @@ const removeInputForm = function() {
 }
 
 const handleAddProject = function() {
+  //take what's in #addProjectInput
+  //put it in a div with class "projects"
+  //save it to storage
+  //remove the input form
+  //append the div to #projectsList
 
 }
 
@@ -141,6 +146,7 @@ const setProjectTitle = function(title) {
 
 const renderTaskList = function(title) {
   //remove the current task list and bring in all the associated tasks from the storage compartment of our shit
+
 }
 
 const createTaskFromInput = function() {
@@ -188,7 +194,7 @@ const appendAddTaskButton = function() {
 
 const handleCancelAddTaskButton = function() {
   console.log(this)
-  removeInputForm();
+  removeTaskInputForm();
   appendAddTaskButton();
 }
 
