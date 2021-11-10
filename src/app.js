@@ -31,12 +31,28 @@ const appendProjectElement = function(projectName) {
 }
 
 const handleAddProjectSubmitButton = function() {
+  const projectName = document.querySelector('#addProjectInput').value
   const projectList = document.querySelector('#projectList');
   const projectInputForm = document.querySelector('#addProject')
-  const projectName = document.querySelector('#addProjectInput').value
+  if(!storage[projectName]) {
+
   projectList.removeChild(projectInputForm)
   appendProjectElement(projectName);
+  saveProjectToStorage(projectName)
   projectList.appendChild(createAddProjectButton())
+  } else {
+    alert('projects must be a different name!')
+  }
+}
+
+const createProjectObject = function() {
+  return {
+    'tasks': [],
+    'description':''
+  }
+}
+const saveProjectToStorage = function(projectName) {
+  storage[projectName] = createProjectObject();
 }
 
 const createTaskFromInput = function() {
