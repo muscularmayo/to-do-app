@@ -16,11 +16,61 @@ storage['default project'] =
 'description': 'a brief description of the project at hand'};
 */
 
+const createProjectElementFromInput = function(projectName) {
+  const projectElement = document.createElement('div');
+  projectElement.innerHTML = projectName;
+  projectElement.setAttribute('class','project')
+  projectElement.addEventListener('click',handleProjectClick)
+
+  return projectElement;
+}
+
+const appendProjectElement = function(projectName) {
+  const projectList = document.querySelector('#projectList');
+  projectList.appendChild(createProjectElementFromInput(projectName))
+}
+
+const handleAddProjectSubmitButton = function() {
+  const projectList = document.querySelector('#projectList');
+  const projectInputForm = document.querySelector('#addProject')
+  const projectName = document.querySelector('#addProjectInput').value
+  projectList.removeChild(projectInputForm)
+  appendProjectElement(projectName);
+  projectList.appendChild(createAddProjectButton())
+}
+
+const createTaskFromInput = function() {
+  const task = {}
+  task.title = document.querySelector('#title').value  ||'default task'
+  task.description = document.querySelector('#description').value || ''
+  task.date = document.querySelector('#date').value || ''
+  task.priority = document.querySelector('#priority').value || ''
+
+  return task;
+}
+
+const createTask = function(title, description, date, priority) {
+  const task = {}
+  task.title = title
+  task.description = description
+  task.date = date
+  task.priority = priority
+
+  return task;
+}
+
 const storage = {};
-storage['default project'] = {
-  'tasks': [],
-  'description': ''
-};
+
+const defaultStorage = function () {
+  storage['default project'] = {
+    'tasks': [],
+    'description': ''
+  };
+
+  storage['default project'].tasks.push(createTask('default task', '', '', 'Low'))
+}
+
+defaultStorage();
 
 
 
@@ -92,6 +142,7 @@ const createAddProjectInput = function() {
   add.innerHTML = 'Add'
   cancel.innerHTML = 'Cancel'
   cancel.addEventListener('click', handleCancelAddProjectButton)
+  add.addEventListener('click', handleAddProjectSubmitButton)
   div.appendChild(add)
   div.appendChild(cancel)
   main.appendChild(input);
@@ -126,7 +177,6 @@ const appendAddProjectButton = function() {
 }
 appendAddProjectButton();
 
-console.log(createAddProjectInput())
 
 const setProjectTitle = function(title) {
   const h3 = document.createElement('h3')
@@ -147,26 +197,16 @@ const setProjectTitle = function(title) {
 const renderTaskList = function(title) {
   //remove the current task list and bring in all the associated tasks from the storage compartment of our shit
 
+
 }
 
-const createTaskFromInput = function() {
-  const task = {}
-  task.title = document.querySelector('#title') || 'default task'
-  task.description = document.querySelector('#description') || ''
-  task.date = document.querySelector('#date')
-  task.priority = document.querySelector('#priority')
 
-  return task;
-}
 
 const storeTaskFromInput = function() {
 
 }
 
-const handleInputSubmit = function () {
-  //create task from input, save it to storage, render page from storage (using storage/state to append things)
-  //remove input form, return addTask button
-}
+
 
 const createAddTaskButton = function() {
   //<button id='addTask' onClick='appendInputForm'>Add Task</button>
@@ -260,6 +300,7 @@ const createInputForm = function() {
   submit.innerHTML = 'Submit'
   cancel.innerHTML = 'Cancel'
   cancel.addEventListener('click', handleCancelAddTaskButton)
+  submit.addEventListener('click', handleAddTaskSubmitButton)
   div.appendChild(submit)
   div.appendChild(cancel)
 
@@ -278,6 +319,20 @@ const appendInputForm = function() {
 
 }
 
+const createTaskElement = function (taskTitle) {
+  const div = document.createElement('div');
+  div.setAttribute('class','tasks')
+  div.innerHTML = taskTitle;
+
+  return div;
+}
+
+const appendTaskElement = function(taskTitle){
+  const taskElement = createTaskElement(taskTitle);
+  document.querySelector('#taskList').appendChild(taskElement)
+}
+
+
 const handleAddTaskButton = function() {
   if(!document.querySelector('#taskForm')) {
     removeAddTaskButton();
@@ -287,7 +342,23 @@ const handleAddTaskButton = function() {
 }
 
 const handleAddTaskSubmitButton = function () {
-  createTaskFromInput();
+  //create task from input, save it to storage, render page from storage (using storage/state to append things)
+  //remove input form, return addTask button
+  const task = createTaskFromInput();
+  console.log(task)
+  const currentProject = storage[document.querySelector('#projectTitle').firstElementChild.innerHTML];
+  currentProject.tasks.push(task)
+  const taskElement = createTaskElement(task.title)
+  removeTaskInputForm();
+  appendTaskElement(task.title)
+  appendAddTaskButton();
+
+
+
+}
+console.log(createTaskElement('111111'))
+
+const handleProjectInputSubmit = function () {
 
 }
 
