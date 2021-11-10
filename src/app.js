@@ -19,6 +19,9 @@ storage['default project'] =
 {'tasks' : [{'title': 'placeholder', 'date': '03/03/03', 'details': 'some deets here', 'priority': 'high'}],
 'description': 'a brief description of the project at hand'};
 */
+
+//needs to be organized lmao
+
 const handleAddTaskButton = function() {
   if(!document.querySelector('#taskForm')) {
     removeAddTaskButton();
