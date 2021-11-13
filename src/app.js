@@ -171,6 +171,7 @@ const renderProjectList = function() {
   Object.keys(storage).forEach(function(key){
     appendProjectElement(key)
   })
+  appendAddProjectButton();
 
   document.querySelector('#projectList')
 }
@@ -188,26 +189,8 @@ const defaultStorage = function () {
   localStorage.setItem('default project', JSON.stringify(storage['default project']))
 }
 
-if (localStorage.length === 0) {
-  defaultStorage();
-  renderProjectList();
-  const title = Object.keys(storage)[0]
-  setProjectTitle(title)
-  renderTaskList(title)
-} else {
-  Object.keys(localStorage).forEach(function(key){
-    storage[key] = JSON.parse(localStorage.getItem(key))
-  })
-  renderProjectList();
-  const title = Object.keys(storage)[0]
-  setProjectTitle(title)
-  renderTaskList(title)
 
-  // for (const key of localStorage) {
-  //   storage[key] = JSON.parse(localStorage[key]);
 
-  // }
-}
 
 
 
@@ -304,7 +287,6 @@ const appendAddProjectButton = function() {
     projectList.appendChild(createAddProjectButton())
   }
 }
-appendAddProjectButton();
 
 
 
@@ -444,47 +426,43 @@ const handleAddTaskSubmitButton = function () {
   appendTaskElement(task.title)
   appendAddTaskButton();
 }
-console.log(createTaskElement('111111'))
 
 const handleProjectInputSubmit = function () {
 
 }
 
 
-//console.log(createInputForm())
+const initialization = function() {
+  if (localStorage.length === 0) {
+    defaultStorage();
+    renderProjectList();
+    const title = Object.keys(storage)[0]
+    setProjectTitle(title)
+    renderTaskList(title)
+  } else {
+    Object.keys(localStorage).forEach(function(key){
+      storage[key] = JSON.parse(localStorage.getItem(key))
+    })
+    renderProjectList();
+    const title = Object.keys(storage)[0]
+    setProjectTitle(title)
+    renderTaskList(title)
 
-//<div id="taskList">
-  //<tasks all over the place>
-/*  <div id='taskForm'>
-          <label for='title'>Task Name</label>
-          <input type='text' id='title'>
+    // for (const key of localStorage) {
+    //   storage[key] = JSON.parse(localStorage[key]);
 
-          <input type='date' id='date'>
+    // }
+  }
+}
 
-          <label for='priority'>Priority</label>
-          <select id='priority' name='priority'>
-            <option value='high'>High</option>
-            <option value='medium'>Medium</option>
-            <option value='low'>Low</option>
-          </select>
-
-          <label for='description'>Task Description</label>
-
-          <input type='text' id='description'>
-          <div>
-            <input type='submit' value='Submit' onsubmit='createTaskfromInput()'>
-          </div>
-        </div>
-*/
 
 console.log(createInputForm())
 
-projects.forEach(project => {
-  project.addEventListener('click', handleProjectClick)
-})
+
 
 addTaskButton.addEventListener('click', handleAddTaskButton)
 
+initialization();
 
 
 
