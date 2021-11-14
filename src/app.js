@@ -432,13 +432,14 @@ const handleProjectInputSubmit = function () {
 }
 
 
-const initialization = function() {
+export const initialization = function() {
   if (localStorage.length === 0) {
     defaultStorage();
     renderProjectList();
     const title = Object.keys(storage)[0]
     setProjectTitle(title)
     renderTaskList(title)
+    return title;
   } else {
     Object.keys(localStorage).forEach(function(key){
       storage[key] = JSON.parse(localStorage.getItem(key))
@@ -447,6 +448,7 @@ const initialization = function() {
     const title = Object.keys(storage)[0]
     setProjectTitle(title)
     renderTaskList(title)
+    return title;
 
     // for (const key of localStorage) {
     //   storage[key] = JSON.parse(localStorage[key]);
@@ -466,3 +468,5 @@ initialization();
 
 
 export {container as container}
+
+module.exports = { initialization, createInputForm }
