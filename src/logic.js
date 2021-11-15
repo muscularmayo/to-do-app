@@ -72,6 +72,16 @@ export const createAddProjectInput = function() {
   div.appendChild(cancel)
   main.appendChild(input);
   main.appendChild(div);
+
+  input.setAttribute('autofocus','true')
+
+  input.addEventListener('keyup', function(event) {
+    event.preventDefault();
+    if (event.keyCode ===13) {
+      handleAddProjectSubmitButton();
+    }
+  });
+
   return main;
 
 
@@ -155,6 +165,29 @@ export const createInputForm = function() {
   //submit.setAttribute('onsubmit', 'createTaskFromInput')
 
 
+  descriptionInput.addEventListener('keyup', function(event) {
+    event.preventDefault();
+    if (event.keyCode ===13) {
+      handleAddTaskSubmitButton();
+    }
+  });
+
+  titleInput.addEventListener('keyup', function(event) {
+    event.preventDefault();
+    if (event.keyCode ===13) {
+      handleAddTaskSubmitButton();
+    }
+  });
+
+  dateInput.addEventListener('keyup', function(event) {
+    event.preventDefault();
+    if (event.keyCode ===13) {
+      handleAddTaskSubmitButton();
+    }
+  });
+
+
+
   return main;
 }
 
@@ -213,11 +246,16 @@ export const handleAddTaskButton = function() {
     removeAddTaskButton();
     appendInputForm();
   }
+  document.querySelector('#title').focus();
 
 }
 
 export const handleAddProjectSubmitButton = function() {
   const projectName = document.querySelector('#addProjectInput').value
+  if (projectName === '') {
+    alert('please name your project!')
+    return;
+  }
   const projectList = document.querySelector('#projectList');
   const projectInputForm = document.querySelector('#addProject')
   if(!storage[projectName]) {

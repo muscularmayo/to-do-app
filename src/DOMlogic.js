@@ -39,6 +39,7 @@ export const appendAddProjectInput = function() {
   const projectList = document.querySelector('#projectList')
   projectList.removeChild(addButton)
   projectList.appendChild(createAddProjectInput())
+  document.querySelector('#addProjectInput').focus();
 }
 
 export const appendAddProjectButton = function() {
