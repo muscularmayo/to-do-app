@@ -38,6 +38,9 @@ body {
 
 .project {
   padding: 1px;
+  border: 1px outset white;
+  min-height: 20px;
+  background-color: #9E9E9E;
 }
 
 #taskForm > button, label, input, select {
