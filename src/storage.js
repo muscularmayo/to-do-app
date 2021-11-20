@@ -14,7 +14,7 @@ export const defaultStorage = function () {
     'description': ''
   };
   localStorage.setItem("today's tasks", JSON.stringify(storage["today's tasks"]))
-  storage['default project'].tasks.push(createTask('default task', '', '', 'Low'))
+  storage['default project'].tasks.push(createTask('default task', '', '', 'Low', 'default project'))
   localStorage.setItem('default project', JSON.stringify(storage['default project']))
 }
 
@@ -28,4 +28,27 @@ export const saveTaskToStorage = function(projectName) {
   const project = storage[projectName]
   localStorage.removeItem(projectName)
   localStorage.setItem(projectName, JSON.stringify(project))
+
+}
+
+export const deleteProject = function(projectName) {
+  const project = storage[projectName]
+
+  storage["today's tasks"].tasks.forEach((element, index, object) => {
+    if(element.project === projectName) {
+      object.splice(index,1)
+    }
+  })
+  saveTaskToTodaysTasks();
+
+  localStorage.removeItem(projectName)
+  delete storage[projectName];
+
+
+}
+
+export const saveTaskToTodaysTasks = function() {
+  const todaysTasks = storage["today's tasks"];
+  localStorage.removeItem(todaysTasks)
+  localStorage.setItem("today's tasks", JSON.stringify(todaysTasks))
 }

@@ -54,3 +54,10 @@ div > button, input {
 #addProject {
   background-color: #A9A9A9
 }
+
+.icon {
+  height: 18px;
+  width: 18px;
+  position: relative;
+  float: right;
+}

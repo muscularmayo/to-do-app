@@ -1,8 +1,9 @@
 //logic for how we handle different events shall go in here
-import {appendAddProjectInput, setProjectTitle, renderTaskList, removeAddTaskButton, removeTaskInputForm, appendInputForm, appendTaskElement, appendProjectElement, appendAddTaskButton} from './DOMlogic.js'
-import { defaultStorage, saveProjectToStorage, saveTaskToStorage} from './storage.js'
+import {appendAddProjectInput, removeProject, setProjectTitle, renderTaskList, removeAddTaskButton, removeTaskInputForm, appendInputForm, appendTaskElement, appendProjectElement, appendAddTaskButton} from './DOMlogic.js'
+import { saveTaskToTodaysTasks, defaultStorage, saveProjectToStorage, saveTaskToStorage, deleteProject} from './storage.js'
 import {storage} from './app.js'
-
+import EditIcon from '../edit.png'
+import DeleteIcon from '../delete.png'
 
 export const createAddTaskButton = function() {
   //<button id='addTask' onClick='appendInputForm'>Add Task</button>
@@ -21,6 +22,29 @@ export const createProjectElementFromInput = function(projectName) {
   projectElement.setAttribute('class','project')
   projectElement.addEventListener('click',handleProjectClick)
 
+  const buttons = document.createElement('span')
+
+  const edit = new Image();
+  edit.src = EditIcon;
+  edit.classList.add('edit')
+  edit.classList.add('icon')
+  edit.addEventListener('click', handleEditProjectClick)
+
+  buttons.appendChild(edit);
+
+  const deleteIcon = new Image();
+  deleteIcon.src = DeleteIcon;
+  deleteIcon.classList.add('delete')
+  deleteIcon.classList.add('icon')
+  deleteIcon.addEventListener('click',handleDeleteProjectClick)
+
+  buttons.appendChild(deleteIcon);
+
+  projectElement.appendChild(buttons);
+
+
+
+
   return projectElement;
 }
 
@@ -37,7 +61,7 @@ export const createTaskFromInput = function() {
   task.description = document.querySelector('#description').value || ''
   task.date = document.querySelector('#date').value || ''
   task.priority = document.querySelector('#priority').value || ''
-
+  task.project = document.querySelector('#projectTitle').firstChild.innerText
   return task;
 }
 
@@ -226,15 +250,34 @@ export const handleCancelAddTaskButton = function() {
   appendAddTaskButton();
 }
 
+const todaysDate = function() {
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+
+return today;
+}
+
 export const handleAddTaskSubmitButton = function () {
   //create task from input, save it to storage, render page from storage (using storage/state to append things)
   //remove input form, return addTask button
   const task = createTaskFromInput();
   const projectName = document.querySelector('#projectTitle').firstElementChild.innerHTML
   console.log(task)
+
+  if(task.date === todaysDate()) {
+    storage["today's tasks"].tasks.push(task)
+    saveTaskToTodaysTasks()
+
+  }
+
   const currentProject = storage[projectName]; //{tasks: [], description: ''}
   currentProject.tasks.push(task)
   const taskElement = createTaskElement(task.title)
+
   saveTaskToStorage(projectName)
   removeTaskInputForm();
   appendTaskElement(task.title)
@@ -274,10 +317,23 @@ export const handleAddProjectSubmitButton = function() {
 
 
 export const handleProjectClick = function() {
-  const currentProject = document.querySelector
-  const title = this.innerHTML;
+  const title = this.innerText;
   setProjectTitle(title)
   renderTaskList(title)
   //renderTaskList()
+}
+
+export const handleDeleteProjectClick = function (event) {
+  const projectElement = this.parentNode.parentNode;
+  console.log(projectElement)
+  deleteProject(projectElement.innerText)
+  removeProject(projectElement)
+  event.stopPropagation();
+}
+
+export const handleEditProjectClick = function(event) {
+  event.stopPropagation();
+  const projectElement = this.parentNode.parentNode;
+
 }
 

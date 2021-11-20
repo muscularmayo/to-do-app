@@ -1,6 +1,7 @@
 import './style.css';
 import {initialization} from './initialization.js'
 
+
 export const addTaskButton = document.querySelector('#addTask');
 export const container = document.querySelector('#container');
 export const projects = document.querySelectorAll('.project');
@@ -8,7 +9,6 @@ export const tasks = document.querySelectorAll('.task');
 export const localStorage = window.localStorage;
 
 export let storage = {};
-
 
 initialization();
 

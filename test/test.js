@@ -1,7 +1,7 @@
 //i will learn to use jest to test the rest of my best functions
 const assert = require('assert');
-import mocha from 'mocha'
-import app as app from '../app.js'
+const app = require('../src/app.js')
+
 
 describe('Array', function() {
   describe('#indexOf()', function() {
@@ -11,8 +11,8 @@ describe('Array', function() {
   });
 });
 
-describe('initialization', () => {
-  it('should return "default project" on first use', function() {
-    assert.equal(initialization(), 'default project')
+describe('storage', () => {
+  it('should return "empty object" on first use', function() {
+    assert.equal(storage, '{}')
   })
 })

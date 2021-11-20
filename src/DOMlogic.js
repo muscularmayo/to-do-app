@@ -61,10 +61,14 @@ export const renderTaskList = function(projectName) {
   //remove the current task list and bring in all the associated tasks from the storage compartment of our shit
   //projectName is going to be a string that is a key in my storage
   clearTaskList();
-  console.log(storage)
-  storage[projectName].tasks.forEach(element => {
-    appendTaskElement(element.title)
-  })
+  if(storage[projectName]){
+    storage[projectName].tasks.forEach(element => {
+      appendTaskElement(element.title)
+    })
+  } else {
+    console.log('catch render error')
+  }
+
   appendAddTaskButton()
 
   /*for (let i = 0; i < storage.tasks.length; i++) {
@@ -113,5 +117,15 @@ export const appendInputForm = function() {
   //create a task from that input form, remove the input form, append the task, slap the button back on
   document.querySelector('#taskList').appendChild(createInputForm())
 
+
+}
+
+export const removeProject = function(projectName) {
+  projectName.remove();
+  const newProject = document.querySelector('.project');
+  console.log(newProject)
+  setProjectTitle(newProject.innerText)
+  renderTaskList(newProject.innerText)
+  console.log(newProject.innerText)
 
 }
