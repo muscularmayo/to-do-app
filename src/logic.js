@@ -1,6 +1,6 @@
 //logic for how we handle different events shall go in here
 import {appendAddProjectInput, removeProject, setProjectTitle, renderTaskList, removeAddTaskButton, removeTaskInputForm, appendInputForm, appendTaskElement, appendProjectElement, appendAddTaskButton} from './DOMlogic.js'
-import { saveTaskToTodaysTasks, defaultStorage, saveProjectToStorage, saveTaskToStorage, deleteProject} from './storage.js'
+import { saveTaskToTodaysTasks, defaultStorage, saveProjectToStorage, saveTaskToStorage, deleteProject, editProjectName} from './storage.js'
 import {storage} from './app.js'
 import EditIcon from '../edit.png'
 import DeleteIcon from '../delete.png'
@@ -21,6 +21,8 @@ export const createProjectElementFromInput = function(projectName) {
   projectElement.innerHTML = projectName;
   projectElement.setAttribute('class','project')
   projectElement.addEventListener('click',handleProjectClick)
+
+
 
   const buttons = document.createElement('span')
 
@@ -317,7 +319,12 @@ export const handleAddProjectSubmitButton = function() {
 
 
 export const handleProjectClick = function() {
+  if(this.firstElementChild.tagName === 'INPUT') {
+
+    return;
+  }
   const title = this.innerText;
+  console.log(title);
   setProjectTitle(title)
   renderTaskList(title)
   //renderTaskList()
@@ -331,9 +338,46 @@ export const handleDeleteProjectClick = function (event) {
   event.stopPropagation();
 }
 
-export const handleEditProjectClick = function(event) {
-  event.stopPropagation();
-  const projectElement = this.parentNode.parentNode;
+
+export const handleEditProjectSubmit = function(currentName, newName) {
+  editProjectName(currentName, newName)
 
 }
+
+export const handleEditProjectClick = function(event) {
+  const projectElement = this.parentNode.parentNode;
+  const projectName = projectElement.innerText;
+  console.log(projectElement, projectName)
+  setProjectTitle(projectName);
+  renderTaskList(projectName)
+  const inputForm = document.createElement('input');
+  inputForm.setAttribute('autofocus','true')
+  inputForm.setAttribute('type','text')
+
+  projectElement.innerText = ''
+  inputForm.value = projectName;
+  inputForm.focus();
+
+  /*inputForm.addEventListener('keyup', function(event) {
+    event.preventDefault();
+    if (event.keyCode ===13) {
+      const newName = inputForm.value
+      handleEditProjectSubmit(projectName, newName);
+    }
+  });*/
+
+  projectElement.appendChild(inputForm);
+
+
+
+
+
+
+
+
+
+  event.stopPropagation();
+
+}
+
 
