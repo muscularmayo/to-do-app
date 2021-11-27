@@ -53,11 +53,11 @@ export const saveTaskToTodaysTasks = function() {
   localStorage.setItem("today's tasks", JSON.stringify(todaysTasks))
 }
 
-/*export const editProjectName = function(currentName, newName) {
+export const editProjectName = function(currentName, newName) {
   const currentProject = storage[currentName];
   storage[newName] = currentProject
   localStorage.removeItem(currentName);
   localStorage.setItem(newName, JSON.stringify(currentProject))
   delete storage[currentName]
 
-}*/
+}

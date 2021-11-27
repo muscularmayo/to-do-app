@@ -24,6 +24,33 @@ export const createProjectElementFromInput = function(projectName) {
 
 
 
+  // const buttons = document.createElement('span')
+
+  // const edit = new Image();
+  // edit.src = EditIcon;
+  // edit.classList.add('edit')
+  // edit.classList.add('icon')
+  // edit.addEventListener('click', handleEditProjectClick)
+
+  // buttons.appendChild(edit);
+
+  // const deleteIcon = new Image();
+  // deleteIcon.src = DeleteIcon;
+  // deleteIcon.classList.add('delete')
+  // deleteIcon.classList.add('icon')
+  // deleteIcon.addEventListener('click',handleDeleteProjectClick)
+
+  // buttons.appendChild(deleteIcon);
+
+  projectElement.appendChild(createProjectElementButtons());
+
+
+
+
+  return projectElement;
+}
+
+export const createProjectElementButtons = function() {
   const buttons = document.createElement('span')
 
   const edit = new Image();
@@ -42,12 +69,7 @@ export const createProjectElementFromInput = function(projectName) {
 
   buttons.appendChild(deleteIcon);
 
-  projectElement.appendChild(buttons);
-
-
-
-
-  return projectElement;
+  return buttons;
 }
 
 export const createProjectObject = function() {
@@ -319,6 +341,7 @@ export const handleAddProjectSubmitButton = function() {
 
 
 export const handleProjectClick = function() {
+  console.log(this)
   if(this.firstElementChild.tagName === 'INPUT') {
 
     return;
@@ -342,10 +365,13 @@ export const handleDeleteProjectClick = function (event) {
 export const handleEditProjectSubmit = function(currentName, newName) {
   editProjectName(currentName, newName)
 
+
+
+
 }
 
 export const handleEditProjectClick = function(event) {
-  const projectElement = this.parentNode.parentNode;
+  let projectElement = this.parentNode.parentNode;
   const projectName = projectElement.innerText;
   console.log(projectElement, projectName)
   setProjectTitle(projectName);
@@ -353,20 +379,25 @@ export const handleEditProjectClick = function(event) {
   const inputForm = document.createElement('input');
   inputForm.setAttribute('autofocus','true')
   inputForm.setAttribute('type','text')
+  inputForm.setAttribute('id','editProjectInput')
 
   projectElement.innerText = ''
   inputForm.value = projectName;
-  inputForm.focus();
 
-  /*inputForm.addEventListener('keyup', function(event) {
+  inputForm.addEventListener('keyup', function(event) {
     event.preventDefault();
     if (event.keyCode ===13) {
       const newName = inputForm.value
       handleEditProjectSubmit(projectName, newName);
+      projectElement.innerText = newName
+      projectElement.appendChild(createProjectElementButtons())
+      setProjectTitle(newName);
+      renderTaskList(newName)
     }
-  });*/
+  });
 
   projectElement.appendChild(inputForm);
+  document.querySelector('#editProjectInput').focus();
 
 
 
