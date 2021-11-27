@@ -342,7 +342,7 @@ export const handleAddProjectSubmitButton = function() {
 
 export const handleProjectClick = function() {
   console.log(this)
-  if(this.firstElementChild.tagName === 'INPUT') {
+  if(this.firstElementChild && this.firstElementChild.tagName === 'INPUT') {
 
     return;
   }
