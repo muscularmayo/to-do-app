@@ -243,6 +243,9 @@ export const createTaskElement = function (taskTitle) {
   const div = document.createElement('div');
   div.setAttribute('class','tasks')
   div.innerHTML = taskTitle;
+  div.addEventListener('click', function(event) {
+    console.log(this)
+  })
 
   return div;
 }
