@@ -246,6 +246,12 @@ export const createTaskElement = function (taskTitle) {
   div.addEventListener('click', function(event) {
     console.log(this)
   })
+  const otherInfo = document.createElement('div')
+  const spanDescription = document.createElement('span')
+  const spanDate = document.createElement('span')
+  const spanPriority = document.createElement('span')
+
+
 
   return div;
 }
