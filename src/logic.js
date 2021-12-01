@@ -239,10 +239,10 @@ export const createInputForm = function() {
   return main;
 }
 
-export const createTaskElement = function (taskTitle) {
+export const createTaskElement = function (taskTitle, taskDescription, taskDate, taskPriority) {
   const div = document.createElement('div');
   div.setAttribute('class','tasks')
-  div.innerHTML = taskTitle;
+  div.innerText = taskTitle;
   div.addEventListener('click', function(event) {
     console.log(this)
   })
@@ -250,6 +250,31 @@ export const createTaskElement = function (taskTitle) {
   const spanDescription = document.createElement('span')
   const spanDate = document.createElement('span')
   const spanPriority = document.createElement('span')
+
+  if(taskDescription === undefined) {
+    taskDescription = ''
+  }
+
+  if(taskDate === undefined) {
+    taskDate = ''
+  }
+
+  if(taskPriority === undefined) {
+    taskPriority = ''
+  }
+
+
+
+  spanDescription.innerText = taskDescription;
+  spanDate.innerText = taskDate;
+  spanPriority.innerText = taskPriority;
+
+  otherInfo.appendChild(spanDescription)
+  otherInfo.appendChild(spanDate)
+  otherInfo.appendChild(spanPriority)
+
+  div.appendChild(otherInfo)
+
 
 
 
@@ -309,7 +334,7 @@ export const handleAddTaskSubmitButton = function () {
 
   const currentProject = storage[projectName]; //{tasks: [], description: ''}
   currentProject.tasks.push(task)
-  const taskElement = createTaskElement(task.title)
+  const taskElement = createTaskElement(task.title, task.description, task.date, task.priority)
 
   saveTaskToStorage(projectName)
   removeTaskInputForm();
@@ -420,4 +445,7 @@ export const handleEditProjectClick = function(event) {
 
 }
 
+export const handleTaskClick = function(event) {
+
+}
 
