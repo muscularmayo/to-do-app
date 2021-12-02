@@ -88,7 +88,7 @@ export const createTaskFromInput = function() {
   task.project = document.querySelector('#projectTitle').firstChild.innerText
   return task;
 }
-
+//these two functions could have been combined i see now
 export const createTask = function(title, description, date, priority) {
   const task = {}
   task.title = title
@@ -240,23 +240,24 @@ export const createInputForm = function() {
 }
 
 export const createTaskElement = function (taskTitle, taskDescription, taskDate, taskPriority) {
-  const div = document.createElement('div');
+  const div = document.createElement('span');
   div.setAttribute('class','tasks')
   div.innerText = taskTitle;
   div.addEventListener('click', function(event) {
     console.log(this)
   })
-  const otherInfo = document.createElement('div')
-  const spanDescription = document.createElement('span')
-  const spanDate = document.createElement('span')
-  const spanPriority = document.createElement('span')
+  const otherInfo = document.createElement('ul')
+  const spanDescription = document.createElement('li')
+  const spanDate = document.createElement('li')
+  const spanPriority = document.createElement('li')
+
 
   if(taskDescription === undefined) {
-    taskDescription = ''
+    taskDescription = 'no description'
   }
 
   if(taskDate === undefined) {
-    taskDate = ''
+    taskDate = 'no date'
   }
 
   if(taskPriority === undefined) {
@@ -323,7 +324,7 @@ export const handleAddTaskSubmitButton = function () {
   //create task from input, save it to storage, render page from storage (using storage/state to append things)
   //remove input form, return addTask button
   const task = createTaskFromInput();
-  const projectName = document.querySelector('#projectTitle').firstElementChild.innerHTML
+  const projectName = document.querySelector('#projectTitle').firstElementChild.innerText
   console.log(task)
 
   if(task.date === todaysDate()) {
@@ -338,7 +339,7 @@ export const handleAddTaskSubmitButton = function () {
 
   saveTaskToStorage(projectName)
   removeTaskInputForm();
-  appendTaskElement(task.title)
+  appendTaskElement(task.title, task.description, task.date, task.priority)
   appendAddTaskButton();
 }
 

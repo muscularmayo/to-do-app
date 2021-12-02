@@ -29,8 +29,8 @@ export const appendAddTaskButton = function() {
   document.querySelector('#taskList').appendChild(createAddTaskButton())
 }
 
-export const appendTaskElement = function(taskTitle){
-  const taskElement = createTaskElement(taskTitle);
+export const appendTaskElement = function(taskTitle, taskDescription, taskDate, taskPriority){
+  const taskElement = createTaskElement(taskTitle, taskDescription, taskDate, taskPriority);
   document.querySelector('#taskList').appendChild(taskElement)
 }
 
@@ -64,7 +64,7 @@ export const renderTaskList = function(projectName) {
   clearTaskList();
   if(storage[projectName]){
     storage[projectName].tasks.forEach(element => {
-      appendTaskElement(element.title)
+      appendTaskElement(element.title, element.description, element.date, element.priority)
     })
   } else {
     console.log('catch render error')
