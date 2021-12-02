@@ -7,6 +7,7 @@ export const container = document.querySelector('#container');
 export const projects = document.querySelectorAll('.project');
 export const tasks = document.querySelectorAll('.task');
 export const localStorage = window.localStorage;
+export const clearStorageButton = document.querySelector('#clearStorage')
 
 export let storage = {};
 

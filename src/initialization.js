@@ -1,6 +1,6 @@
-import { defaultStorage } from './storage.js'
+import { defaultStorage, clearStorage } from './storage.js'
 import {renderProjectList, setProjectTitle, renderTaskList} from './DOMlogic.js'
-import {storage} from './app.js'
+import {storage, clearStorageButton} from './app.js'
 
 
 export const initialization = function() {
@@ -24,4 +24,6 @@ export const initialization = function() {
 
     // }
   }
+  clearStorageButton.addEventListener('click', clearStorage )
+
 }

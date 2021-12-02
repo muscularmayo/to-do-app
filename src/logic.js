@@ -1,6 +1,6 @@
 //logic for how we handle different events shall go in here
 import {appendAddProjectInput, removeProject, setProjectTitle, renderTaskList, removeAddTaskButton, removeTaskInputForm, appendInputForm, appendTaskElement, appendProjectElement, appendAddTaskButton} from './DOMlogic.js'
-import { saveTaskToTodaysTasks, defaultStorage, saveProjectToStorage, saveTaskToStorage, deleteProject, editProjectName} from './storage.js'
+import { saveTaskToTodaysTasks, defaultStorage, saveProjectToStorage, saveTaskToStorage, deleteProject, editProjectName, clearStorage} from './storage.js'
 import {storage} from './app.js'
 import EditIcon from '../edit.png'
 import DeleteIcon from '../delete.png'
@@ -252,12 +252,12 @@ export const createTaskElement = function (taskTitle, taskDescription, taskDate,
   const spanPriority = document.createElement('li')
 
 
-  if(taskDescription === undefined) {
-    taskDescription = 'no description'
+  if(taskDescription === undefined || taskDescription === '') {
+    taskDescription = 'n/a'
   }
 
-  if(taskDate === undefined) {
-    taskDate = 'no date'
+  if(taskDate === undefined || taskDate === '') {
+    taskDate = 'n/a'
   }
 
   if(taskPriority === undefined) {
@@ -266,13 +266,14 @@ export const createTaskElement = function (taskTitle, taskDescription, taskDate,
 
 
 
-  spanDescription.innerText = taskDescription;
-  spanDate.innerText = taskDate;
-  spanPriority.innerText = taskPriority;
+  spanDescription.innerText = 'description: ' + taskDescription;
+  spanDate.innerText = 'date: ' + taskDate;
+  spanPriority.innerText = 'priority: ' + taskPriority;
 
-  otherInfo.appendChild(spanDescription)
   otherInfo.appendChild(spanDate)
   otherInfo.appendChild(spanPriority)
+  otherInfo.appendChild(spanDescription)
+
 
   div.appendChild(otherInfo)
 
@@ -450,3 +451,7 @@ export const handleTaskClick = function(event) {
 
 }
 
+export const handleClearStorageClick = function() {
+  clearStorage();
+  window.location.reload();
+}

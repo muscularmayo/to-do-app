@@ -1,6 +1,7 @@
 //all logic relating to storage goes here
 import {createProjectObject, createTask} from './logic.js'
 import {storage} from './app.js'
+import {initialization} from './initialization.js'
 
 const localStorage = window.localStorage;
 
@@ -14,7 +15,7 @@ export const defaultStorage = function () {
     'description': ''
   };
   localStorage.setItem("today's tasks", JSON.stringify(storage["today's tasks"]))
-  storage['default project'].tasks.push(createTask('default task', '', '', 'Low', 'default project'))
+  storage['default project'].tasks.push(createTask('default task', 'and a description', 'add a date', 'a priority', 'default project'))
   localStorage.setItem('default project', JSON.stringify(storage['default project']))
 }
 
@@ -60,4 +61,9 @@ export const editProjectName = function(currentName, newName) {
   localStorage.setItem(newName, JSON.stringify(currentProject))
   delete storage[currentName]
 
+}
+
+export const clearStorage = function() {
+  localStorage.clear();
+  window.location.reload();
 }
