@@ -16,6 +16,8 @@ export const defaultStorage = function () {
   };
   localStorage.setItem("today's tasks", JSON.stringify(storage["today's tasks"]))
   storage['default project'].tasks.push(createTask('default task', 'and a description', 'add a date', 'a priority', 'default project'))
+  storage['default project'].tasks.push(createTask('new features', 'editing and deleting tasks', 'coming soon', 'high', 'default project'))
+
   localStorage.setItem('default project', JSON.stringify(storage['default project']))
 }
 
