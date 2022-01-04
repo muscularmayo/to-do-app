@@ -1,19 +1,20 @@
 #container {
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 2fr 5fr;
   grid-gap: 5px;
   grid-template-rows:  1fr minmax(80%, auto) 7fr;
+  border: 1px white;
 }
 
 #container > :nth-child(odd) {
-  background-color: #A9A9A9;
+  background-color: #e2bdbd;
 }
 #container > :nth-child(even) {
-  background-color: #D3D3D3;
+  background-color: #b6c2e4;
 }
 
 #todaysTasks {
-  color: purple;
+  color: blue;
   position: absolute;
   bottom: 0px;
 }
@@ -23,11 +24,11 @@
 }
 
 h1 {
-  background-color: silver;
+  color: white;
 }
 
 body {
-  background-color: silver;
+  background-color: rgb(41, 20, 160);
 }
 
 .task {
@@ -38,13 +39,18 @@ body {
 
 .project {
   padding: 1px;
-  border: 1px outset white;
+  border: 1px outset rgb(0, 0, 0);
   min-height: 20px;
-  background-color: #9E9E9E;
+  background-color: #c49494;
 }
 
 #taskForm > button, label, input, select {
   margin: 3px;
+}
+
+#taskForm {
+  display: flex;
+  flex-direction: column;
 }
 
 div > button, input {
@@ -52,7 +58,7 @@ div > button, input {
 }
 
 #addProject {
-  background-color: #A9A9A9
+  background-color: #e2bdbd
 }
 
 .icon {
@@ -60,4 +66,9 @@ div > button, input {
   width: 18px;
   position: relative;
   float: right;
+}
+
+img {
+  background-color: #c49494;
+
 }
