@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    //publicPath: "/dist/index.html"
+    // publicPath: "/dist/index.html"
   },
   module: {
     rules: [
@@ -21,10 +21,10 @@ module.exports = {
         use: 'mocha-loader',
         exclude: /node_modules/,
       },
-     {
-       test: /\.(png|svg|jpg|jpeg|gif)$/i,
-       type: 'asset/resource',
-     },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   }
 };

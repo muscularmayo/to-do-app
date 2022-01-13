@@ -1,11 +1,7 @@
 #container {
   display: grid;
   grid-template-columns: 2fr 5fr;
-<<<<<<< HEAD
   grid-gap: 4px;
-=======
-  grid-gap: 5px;
->>>>>>> c6ee31203e944af388921b7ef201178d1242b098
   grid-template-rows:  1fr minmax(80%, auto) 7fr;
   border: 1px white;
 }
